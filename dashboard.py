@@ -10,7 +10,7 @@ df = pd.read_excel("DATA_DT.xlsx")
 df["ngay"] = pd.to_datetime(df["ngay"])
 df["san_pham"] = df["san_pham"].astype(str).str.strip().str.title()
 df["khu_vuc"] = df["khu_vuc"].astype(str).str.strip().str.title()
-df["doanh_thu"] = df["so_luong"] * df["gia_ban"]
+df["doanh_thu"] = df["so_luong"] * df["gia_ban"]/1000
 
 # ----- Bộ lọc ở thanh bên -----
 st.sidebar.header("Bộ lọc")
@@ -53,7 +53,7 @@ with col1:
     st.subheader("Doanh thu theo sản phẩm")
     fig_sp = px.bar(
         doanh_thu_sp, x="doanh_thu", y="san_pham", orientation="h",
-        text="doanh_thu", labels={"doanh_thu": "Doanh thu (VNĐ)", "san_pham": "Sản phẩm"},
+        text="doanh_thu", labels={"doanh_thu": "Doanh thu x 1.000 (VNĐ)", "san_pham": "Sản phẩm"},
     )
     fig_sp.update_traces(texttemplate="%{x:,.0f}", textposition="outside", marker_color="#2468C8")
     fig_sp.update_layout(
@@ -81,7 +81,7 @@ with col3:
     st.subheader("Doanh thu theo khu vực")
     fig_kv = px.bar(
         doanh_thu_kv, x="khu_vuc", y="doanh_thu", text="doanh_thu",
-        labels={"doanh_thu": "Doanh thu (VNĐ)", "khu_vuc": "Khu vực"},
+        labels={"doanh_thu": "Doanh thu x1.000 (VNĐ)", "khu_vuc": "Khu vực"},
     )
     fig_kv.update_traces(texttemplate="%{y:,.0f}", textposition="outside", marker_color="#2468C8")
     fig_kv.update_layout(
@@ -94,7 +94,7 @@ with col4:
     st.subheader("Doanh thu theo ngày")
     fig_ngay = px.line(
         doanh_thu_ngay, x="ngay", y="doanh_thu", markers=True,
-        labels={"doanh_thu": "Doanh thu (VNĐ)", "ngay": "Ngày"},
+        labels={"doanh_thu": "Doanh thu x1.000 (VNĐ)", "ngay": "Ngày"},
     )
     fig_ngay.update_traces(line_color="#2468C8")
     fig_ngay.update_layout(
