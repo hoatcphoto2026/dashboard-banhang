@@ -6,7 +6,16 @@ st.set_page_config(page_title="Dashboard doanh thu", layout="wide")
 st.title("Dashboard doanh thu bán hàng")
 
 # ----- Đọc và chuẩn bị dữ liệu -----
-df = pd.read_excel("DATA_DT.xlsx")
+SHEET_ID = "14Rzxzx-1xTuSnQa-Fzfa0gVpEpALrOJeScHFMzp-Tp0"  # thay bằng ID của bạn
+URL_SHEET = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Sheet1"
+
+@st.cache_data(ttl=300)  # làm mới dữ liệu sau 5 phút
+def doc_du_lieu():
+    return pd.read_csv(URL_SHEET)
+
+df = doc_du_lieu()
+
+
 df["ngay"] = pd.to_datetime(df["ngay"])
 df["san_pham"] = df["san_pham"].astype(str).str.strip().str.title()
 df["khu_vuc"] = df["khu_vuc"].astype(str).str.strip().str.title()
