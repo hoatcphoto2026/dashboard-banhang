@@ -9,7 +9,7 @@ st.title("Dashboard doanh thu bán hàng")
 SHEET_ID = "14Rzxzx-1xTuSnQa-Fzfa0gVpEpALrOJeScHFMzp-Tp0"  # thay bằng ID của bạn
 URL_SHEET = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Sheet1"
 
-@st.cache_data(ttl=300)
+@st.cache_data(ttl=60)
 def doc_du_lieu():
     return pd.read_csv(URL_SHEET)
 
