@@ -1,3 +1,5 @@
+https://docs.google.com/spreadsheets/d//edit?usp=sharing
+
 import pandas as pd
 import plotly.express as px
 import streamlit as st
@@ -9,12 +11,15 @@ st.title("Dashboard doanh thu bán hàng")
 SHEET_ID = "14Rzxzx-1xTuSnQa-Fzfa0gVpEpALrOJeScHFMzp-Tp0"  # thay bằng ID của bạn
 URL_SHEET = f"https://docs.google.com/spreadsheets/d/{SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Sheet1"
 
-@st.cache_data(ttl=300)  # làm mới dữ liệu sau 5 phút
+@st.cache_data(ttl=300)
 def doc_du_lieu():
     return pd.read_csv(URL_SHEET)
 
-df = doc_du_lieu()
-
+try:
+    df = doc_du_lieu()
+except Exception as e:
+    st.error("Không đọc được Google Sheet. Kiểm tra quyền chia sẻ và tên tab.")
+    st.stop()
 
 df["ngay"] = pd.to_datetime(df["ngay"])
 df["san_pham"] = df["san_pham"].astype(str).str.strip().str.title()
