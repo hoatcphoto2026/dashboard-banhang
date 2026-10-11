@@ -29,7 +29,7 @@ if df_loc.empty:
 
 # ----- Chỉ số tổng quan -----
 c1, c2, c3 = st.columns(3)
-c1.metric("Tổng doanh thu", f"{df_loc['doanh_thu'].sum():,.0f} x1.000 VNĐ")
+c1.metric("Tổng doanh thu", f"{df_loc['doanh_thu'].sum():,.0f} (x1.000 VNĐ)")
 c2.metric("Tổng số lượng", f"{df_loc['so_luong'].sum():,}")
 c3.metric("Số giao dịch", len(df_loc))
 
