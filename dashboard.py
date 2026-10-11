@@ -4,7 +4,7 @@ import streamlit as st
 st.set_page_config(page_title="Dashboard doanh thu", layout="wide")
 st.title("Dashboard doanh thu bán hàng")
 
-df = pd.read_excel("DATA_DT.XLSX")
+df = pd.read_excel("DATA_DT.xlsx")
 df["ngay"] = pd.to_datetime(df["ngay"])
 df["doanh_thu"] = df["so_luong"] * df["gia_ban"]
 
