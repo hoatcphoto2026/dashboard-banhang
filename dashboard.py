@@ -1,5 +1,3 @@
-https://docs.google.com/spreadsheets/d//edit?usp=sharing
-
 import pandas as pd
 import plotly.express as px
 import streamlit as st
